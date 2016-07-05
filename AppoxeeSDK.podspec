@@ -12,8 +12,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/AppoxeeMobile/iosArtifacts.git", :tag => "4.0.10" }
   s.platform     = :ios, "7.0"
   s.ios.vendored_frameworks = "SDK/AppoxeeSDK.framework"
-  s.ios.public_header_files = 'SDK/AppoxeeSDK.framework/Versions/A/Headers/*.h'
-  s.source_files = 'SDK/AppoxeeSDK.framework/Versions/A/Headers/*.h'
   s.preserve_paths = 'SDK/AppoxeeSDK.framework'
   s.requires_arc = true
 
