@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
-  s.name         = "Appoxee SDK"
+  s.name         = "AppoxeeSDK"
   s.version      = "4.0.10"
   s.summary      = "Appoxee SDK enables developers the harnest to full power of Appoxee on their iOS applications."
   s.description  = 	<<-DESC
