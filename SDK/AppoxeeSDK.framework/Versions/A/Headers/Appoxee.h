@@ -21,16 +21,16 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 @optional
 /**
  Delegate method for informing Push Notification handling by Appoxee SDK.
- @brief Method will be called when a Push Notificaition is handled by Appoxee SDK.
+ @brief Method is called when a Push Notification is handled by Appoxee SDK.
  @param manager A singleton instance of Appoxee.
  @param pushNotificatoin An instance of APXPushNotification object which represents a Push Notification object.
- @param actionIdentifier An optional identifier, if the Push Notification has an 'action' associated with it, else value is nil.
+ @param actionIdentifier An optional identifier, if the Push Notification has an ‘action’ associated with it, else value is nil.
  */
 - (void)appoxee:(nonnull Appoxee *)appoxee handledRemoteNotification:(nonnull APXPushNotification *)pushNotification andIdentifer:(nonnull NSString *)actionIdentifier;
 
 /**
  Delegate method for informing Rich Content handling by Appoxee SDK and was delivered with a Push Notification.
- @brief Method will be called when Rich Content is handled by Appoxee SDK and was delivered with a Push Notification.
+ @brief Method iscalled when Rich Content is handled by Appoxee SDK and is delivered with a Push Notification. @attention The developer should decide how to display the Rich Message content.
  @attention The developer should decide how to display the Rich Message content.
  @param manager A singleton instance of Appoxee.
  @param richMessage An instance of APXRichMessage object which represents Rich Content object.
@@ -48,7 +48,8 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 @property (nonatomic) NSInteger logLevel;
 
 /*!
- * Set to YES to postpone request for notifications.
+ * Set to YES to postpone a request for notifications.
+ * Setting the property should be performed prior to engaging the SDK.
  */
 @property (nonatomic) BOOL postponeNotificationRequest;
 
@@ -56,6 +57,11 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  * Indicates if the device is registered at Appoxee (but not yet ready for push notifications). You can listen to ‘APX_Ready’ NSNotification to catch this event, or use KVO to get notified when state turns to YES.
  */
 @property (nonatomic, readonly) BOOL isReady;
+
+/*!
+ * The Appoxee notification delegate.
+ */
+@property (nonatomic, weak, nullable) id <AppoxeeNotificationDelegate> delegate;
 
 /*!
  * The user's DMC user ID.
@@ -91,21 +97,37 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 
 /**
  Method auto integrate and engage with Appoxee SDK.
+ @brief Call this method to perform auto integration of your AppDelegate file, and to engage with Appoxee SDK.
+ @attention Provide an AppoxeeConfiguration.plist in your application. Method is considered critical, and must be implemented.
+ @code
+ - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+ {
+    // Method takes into consideration a valid AppoxeeConfig.plist file in your application.
+    [[Appoxee shared] engageAndAutoIntegrateWithLaunchOptions:launchOptions andDelegate:nil];
+    return YES;
+ }
+ @endcode
+ @param launchOptions NSDictionary which contains the launchOptions of didFinishLaunchingWithOptions AppDelegate method.
+ @param delegate An object which conforms to AppoxeeDelegate Protocol.
+ */
+- (void)engageAndAutoIntegrateWithLaunchOptions:(nullable NSDictionary *)launchOptions andDelegate:(nullable id<AppoxeeNotificationDelegate>)delegate;
+
+/**
+ Method auto integrate and engage with Appoxee SDK.
  @brief Call this method to perform auto integration of your AppDelegate file, and to engage with Appoxee SDK. 
  @attention Method is considered critical, and must be implemented.
  @code
  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
  {
-    [[Appoxee shared] engageAndAutoIntegrateWithLaunchOptions:launchOptions andDelegate:self andSDKID:@"123" andAppSecret:@"123"];
+    [[Appoxee shared] engageAndAutoIntegrateWithLaunchOptions:launchOptions andDelegate:self andSDKID:@"123"];
     return YES;
  }
  @endcode
  @param launchOptions NSDictionary which contains the launchOptions of didFinishLaunchingWithOptions AppDelegate method.
  @param delegate An object which conforms to AppoxeeDelegate Protocol.
  @param sdkID NSString representation of the SDK ID.
- @param appSecret NSString representation of the App Secret.
  */
-- (void)engageAndAutoIntegrateWithLaunchOptions:(nullable NSDictionary *)launchOptions andDelegate:(nullable id<AppoxeeNotificationDelegate>)delegate andSDKID:(nonnull NSString *)sdkID andAppSecret:(nonnull NSString *)appSecret;
+- (void)engageAndAutoIntegrateWithLaunchOptions:(nullable NSDictionary *)launchOptions andDelegate:(nullable id<AppoxeeNotificationDelegate>)delegate andSDKID:(nonnull NSString *)sdkID;
 /**
  Method for engaging Appoxee SDK.
  @brief Call this method to engage Appoxee SDK in your application. 
@@ -113,21 +135,20 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  @code
  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
  {
-    [[Appoxee shared] engageWithLaunchOptions:launchOptions andDelegate:self andSDKID:@"123" andAppSecret:@"123"];
+    [[Appoxee shared] engageWithLaunchOptions:launchOptions andDelegate:self andSDKID:@"123"];
     return YES;
  }
  @endcode
  @param launchOptions NSDictionary which contains the launchOptions of didFinishLaunchingWithOptions AppDelegate method.
  @param delegate An object which conforms to AppoxeeDelegate Protocol.
  @param sdkID NSString representation of the SDK ID.
- @param appSecret NSString representation of the App Secret.
  */
-- (void)engageWithLaunchOptions:(nullable NSDictionary *)launchOptions andDelegate:(nullable id<AppoxeeNotificationDelegate>)delegate andSDKID:(nonnull NSString *)sdkID andAppSecret:(nonnull NSString *)appSecret;
+- (void)engageWithLaunchOptions:(nullable NSDictionary *)launchOptions andDelegate:(nullable id<AppoxeeNotificationDelegate>)delegate andSDKID:(nonnull NSString *)sdkID;
 
 /**
  Method for notifing Appoxee registration for Push Notifications was succesful.
  @brief Notify Appoxee on a successful registration of APNS. 
- @attention method is considered critical and must be implemented. If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret: is used, implementation is optional.
+ @attention method is considered critical and must be implemented. If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID or engageAndAutoIntegrateWithLaunchOptions:andDelegate: is used, implementation is optional.
  @code
  - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
  {
@@ -141,7 +162,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 /**
  Method for notifing Appoxee on registration progress.
  @brief Appoxee on registration progress. 
- @attention method is considered critical and must be implemented. If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret: is used, implementation is optional.
+ @attention method is considered critical and must be implemented. If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID: or engageAndAutoIntegrateWithLaunchOptions:andDelegate: is used, implementation is optional.
  @code
  - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
  {
@@ -157,7 +178,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 /**
  Method for notifing Appoxee a remote Push Notification was received to the device.
  @brief Use this method to pass information to Appoxee Manager regarding incoming push notifications. 
- @attention method is considered critical and must be implemented. If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret: is used, implementation is optional.
+ @attention method is considered critical and must be implemented. If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID: or engageAndAutoIntegrateWithLaunchOptions:andDelegate: is used, implementation is optional.
  @code
  - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
  {
@@ -171,7 +192,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 /**
  Method for handling 'Push Actions'. Forward this call to Appoxee directly and call completionHandler(); if the returned value is NO, since Appoxee will not handle a complete custom action provided by the developer.
  @brief Implementation of this method enables ‘Push Actions’. Forward this call to Appoxee directly and call completionHandler(); if the returned value is NO, since Appoxee will not handle a complete custom action provided by the developer. 
- @attention If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret: is used, implementation is optional.
+ @attention If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID: or engageAndAutoIntegrateWithLaunchOptions:andDelegate: is used, implementation is optional.
  @code
  - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler
  {
@@ -193,7 +214,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 /**
  Method for enabling Appoxee to fetch new data while in background. If completionHandler is nil, Appoxee assumes the developer also has work to perform, and by this Appoxee will NOT call the completionHandler, but it will provide a UIBackgroundFetchResult as an NSNumber argument in the AppoxeeCompletionHandler block. Application's plist must contain a 'remote-notification' value in 'UIBackgroundModes'.
  @brief Implementation of this method enables Appoxee to fetch new data, or update a geo location, while in background. If completionHandler is nil, Appoxee assumes the developer also has work to perform, and by this Appoxee will NOT call the completionHandler, but it will provide a UIBackgroundFetchResult as an NSNumber argument in the AppoxeeCompletionHandler block. Application’s plist must contain a ‘remote-notification’ value in ‘UIBackgroundModes’. 
- @attention If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret: is used, implementation is optional. 
+ @attention If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID: or engageAndAutoIntegrateWithLaunchOptions:andDelegate: is used, implementation is optional.
  @code
  // 1. 
  // Handling a silent push which did not originate at Appoxee. 
@@ -248,7 +269,8 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 
 /**
  Method for enabling Appoxee to fetch new data while in background. If fetchHandler is nil, Appoxee assumes the developer also has work to perform, and by this Appoxee will NOT call the fetchHandler, but it will provide a UIBackgroundFetchResult as an NSNumber argument in the AppoxeeCompletionHandler block. Application's plist must contain a 'fetch' value in 'UIBackgroundModes'.
- @brief Implementation of this method enables Appoxee to fetch new data, or update a geo location, while in background. If fetchHandler is nil, Appoxee assumes the developer also has work to perform, and by this Appoxee will NOT call the fetchHandler, but it will provide a UIBackgroundFetchResult as an NSNumber argument in the AppoxeeCompletionHandler block. Application’s plist must contain a ‘fetch’ value in ‘UIBackgroundModes’. @attention If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret: is used, implementation is optional. 
+ @brief Implementation of this method enables Appoxee to fetch new data, or update a geo location, while in background. If fetchHandler is nil, Appoxee assumes the developer also has work to perform, and by this Appoxee will NOT call the fetchHandler, but it will provide a UIBackgroundFetchResult as an NSNumber argument in the AppoxeeCompletionHandler block. Application’s plist must contain a ‘fetch’ value in ‘UIBackgroundModes’. 
+ @attention If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID: or engageAndAutoIntegrateWithLaunchOptions:andDelegate: is used, implementation is optional.
  @code
 // 1.
 // In case the developer needs to perform work. 
@@ -643,6 +665,18 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Get information on the current iDevice.
  @brief Method gets information on the current iDevice.
  @code
+    // Note that calling this method prior to device registration will provide basic information regarding this device.
+    // Developers should prefare using deviceInformationwithCompletionHandler:
+    APXClientDevice *device = [[Appoxee shared] deviceInfo];
+ @endcode
+ @param APXClientDevice an instance that describes this device.
+ */
+- (nonnull APXClientDevice *)deviceInfo;
+
+/**
+ Get information on the current iDevice.
+ @brief Method gets information on the current iDevice.
+ @code
  [[Appoxee shared] deviceInformationwithCompletionHandler:^(NSError *appoxeeError, id data) {
  
     if (!appoxeeError && [data isKindOfClass:[APXClientDevice class]]) {
@@ -654,26 +688,6 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  @param handler Code Block to be executed when method completes with an NSError object and data as arguments.
  */
 - (void)deviceInformationwithCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
-
-#pragma mark - Content
-
-/**
- Standalone Feature
- Show a UIViewController with a Feedback form on top of the current displaying UIViewController.
- @brief Method fetches HTML string, to be displayed by the developer, on top of the current UIViewController.
- @code
- [[Appoxee shared] showFeedbackWithCompletionHandler:^(NSError *appoxeeError, id data) {
- 
-    if (!appoxeeError) {
- 
-        NSString *html = (NSString *)data;
-        // Use the url provided, and display it.
-    }
- }];
- @endcode
- @param handler Code Block to be executed when method completes with an NSError object and data as arguments.
- */
-- (void)showFeedbackWithCompletionHandler:(nullable AppoxeeCompletionHandler)handler DEPRECATED_MSG_ATTRIBUTE("API will be deprecated in 3 versions.");;
 
 #pragma mark - Inbox API
 

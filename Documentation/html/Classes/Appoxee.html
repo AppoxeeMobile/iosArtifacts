@@ -54,6 +54,8 @@
 	
 	<optgroup label="Properties">
 		
+		<option value="//api/name/delegate">delegate</option>
+		
 		<option value="//api/name/dmcAlias">dmcAlias</option>
 		
 		<option value="//api/name/dmcUserID">dmcUserID</option>
@@ -92,6 +94,8 @@
 		
 		<option value="//api/name/deleteRichMessage:withHandler:">- deleteRichMessage:withHandler:</option>
 		
+		<option value="//api/name/deviceInfo">- deviceInfo</option>
+		
 		<option value="//api/name/deviceInformationwithCompletionHandler:">- deviceInformationwithCompletionHandler:</option>
 		
 		<option value="//api/name/didReceiveRemoteNotification:fetchCompletionHandler:andNotifyCompletionWithBlock:">- didReceiveRemoteNotification:fetchCompletionHandler:andNotifyCompletionWithBlock:</option>
@@ -104,9 +108,11 @@
 		
 		<option value="//api/name/disablePushNotifications:withCompletionHandler:">- disablePushNotifications:withCompletionHandler:</option>
 		
-		<option value="//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:">- engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:</option>
+		<option value="//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:">- engageAndAutoIntegrateWithLaunchOptions:andDelegate:</option>
 		
-		<option value="//api/name/engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret:">- engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret:</option>
+		<option value="//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:">- engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:</option>
+		
+		<option value="//api/name/engageWithLaunchOptions:andDelegate:andSDKID:">- engageWithLaunchOptions:andDelegate:andSDKID:</option>
 		
 		<option value="//api/name/fetchApplicationTags:">- fetchApplicationTags:</option>
 		
@@ -143,8 +149,6 @@
 		<option value="//api/name/setNumberValue:forKey:withCompletionHandler:">- setNumberValue:forKey:withCompletionHandler:</option>
 		
 		<option value="//api/name/setStringValue:forKey:withCompletionHandler:">- setStringValue:forKey:withCompletionHandler:</option>
-		
-		<option value="//api/name/showFeedbackWithCompletionHandler:">- showFeedbackWithCompletionHandler:</option>
 		
 	</optgroup>
 	
@@ -240,7 +244,8 @@
 			
 			
 			<div class="method-subsection brief-description">
-				<p>Set to YES to postpone request for notifications.</p>
+				<p>Set to YES to postpone a request for notifications.
+Setting the property should be performed prior to engaging the SDK.</p>
 			</div>
 			
 		    
@@ -287,6 +292,47 @@
 		    
 
 			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) BOOL isReady</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Appoxee.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The Appoxee notification delegate.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak, nullable) id&lt;AppoxeeNotificationDelegate&gt; delegate</code></div>
 
 		    
 			
@@ -499,8 +545,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:" title="engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:">&ndash;&nbsp;engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:</a></code>
+	<a name="//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:" title="engageAndAutoIntegrateWithLaunchOptions:andDelegate:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:">&ndash;&nbsp;engageAndAutoIntegrateWithLaunchOptions:andDelegate:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -511,12 +557,13 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 			
 			<div class="method-subsection brief-description">
 				<p>Call this method to perform auto integration of your AppDelegate file, and to engage with Appoxee SDK.
-@attention Method is considered critical, and must be implemented.</p>
+@attention Provide an AppoxeeConfiguration.plist in your application. Method is considered critical, and must be implemented.</p>
 
 <pre><code>
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[Appoxee shared] engageAndAutoIntegrateWithLaunchOptions:launchOptions andDelegate:self andSDKID:@"123" andAppSecret:@"123"];
+    // Method takes into consideration a valid AppoxeeConfig.plist file in your application.
+    [[Appoxee shared] engageAndAutoIntegrateWithLaunchOptions:launchOptions andDelegate:nil];
     return YES;
 }
 </pre>
@@ -527,7 +574,7 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)engageAndAutoIntegrateWithLaunchOptions:(nullable NSDictionary *)<em>launchOptions</em> andDelegate:(nullable id&lt;AppoxeeNotificationDelegate&gt;)<em>delegate</em> andSDKID:(nonnull NSString *)<em>sdkID</em> andAppSecret:(nonnull NSString *)<em>appSecret</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)engageAndAutoIntegrateWithLaunchOptions:(nullable NSDictionary *)<em>launchOptions</em> andDelegate:(nullable id&lt;AppoxeeNotificationDelegate&gt;)<em>delegate</em></code></div>
 
 		    
 			
@@ -543,16 +590,6 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 					<tr>
 						<th scope="row" class="argument-name"><code>delegate</code></th>
 						<td><p>An object which conforms to <a href="../Protocols/AppoxeeDelegate.html">AppoxeeDelegate</a> Protocol.</p></td>
-					</tr>
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>sdkID</code></th>
-						<td><p>NSString representation of the SDK ID.</p></td>
-					</tr>
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>appSecret</code></th>
-						<td><p>NSString representation of the App Secret.</p></td>
 					</tr>
 				
 				</table>
@@ -579,8 +616,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret:" title="engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret:">&ndash;&nbsp;engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret:</a></code>
+	<a name="//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:" title="engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:">&ndash;&nbsp;engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -590,13 +627,13 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 			
 			
 			<div class="method-subsection brief-description">
-				<p>Call this method to engage Appoxee SDK in your application.
+				<p>Call this method to perform auto integration of your AppDelegate file, and to engage with Appoxee SDK.
 @attention Method is considered critical, and must be implemented.</p>
 
 <pre><code>
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[Appoxee shared] engageWithLaunchOptions:launchOptions andDelegate:self andSDKID:@"123" andAppSecret:@"123"];
+    [[Appoxee shared] engageAndAutoIntegrateWithLaunchOptions:launchOptions andDelegate:self andSDKID:@"123"];
     return YES;
 }
 </pre>
@@ -607,7 +644,7 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)engageWithLaunchOptions:(nullable NSDictionary *)<em>launchOptions</em> andDelegate:(nullable id&lt;AppoxeeNotificationDelegate&gt;)<em>delegate</em> andSDKID:(nonnull NSString *)<em>sdkID</em> andAppSecret:(nonnull NSString *)<em>appSecret</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)engageAndAutoIntegrateWithLaunchOptions:(nullable NSDictionary *)<em>launchOptions</em> andDelegate:(nullable id&lt;AppoxeeNotificationDelegate&gt;)<em>delegate</em> andSDKID:(nonnull NSString *)<em>sdkID</em></code></div>
 
 		    
 			
@@ -630,9 +667,79 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 						<td><p>NSString representation of the SDK ID.</p></td>
 					</tr>
 				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Appoxee.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/engageWithLaunchOptions:andDelegate:andSDKID:" title="engageWithLaunchOptions:andDelegate:andSDKID:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/engageWithLaunchOptions:andDelegate:andSDKID:">&ndash;&nbsp;engageWithLaunchOptions:andDelegate:andSDKID:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Call this method to engage Appoxee SDK in your application.
+@attention Method is considered critical, and must be implemented.</p>
+
+<pre><code>
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [[Appoxee shared] engageWithLaunchOptions:launchOptions andDelegate:self andSDKID:@"123"];
+    return YES;
+}
+</pre>
+
+
+<p></code></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)engageWithLaunchOptions:(nullable NSDictionary *)<em>launchOptions</em> andDelegate:(nullable id&lt;AppoxeeNotificationDelegate&gt;)<em>delegate</em> andSDKID:(nonnull NSString *)<em>sdkID</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
 					<tr>
-						<th scope="row" class="argument-name"><code>appSecret</code></th>
-						<td><p>NSString representation of the App Secret.</p></td>
+						<th scope="row" class="argument-name"><code>launchOptions</code></th>
+						<td><p>NSDictionary which contains the launchOptions of didFinishLaunchingWithOptions AppDelegate method.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delegate</code></th>
+						<td><p>An object which conforms to <a href="../Protocols/AppoxeeDelegate.html">AppoxeeDelegate</a> Protocol.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sdkID</code></th>
+						<td><p>NSString representation of the SDK ID.</p></td>
 					</tr>
 				
 				</table>
@@ -671,7 +778,7 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 			
 			<div class="method-subsection brief-description">
 				<p>Notify Appoxee on a successful registration of APNS.
-@attention method is considered critical and must be implemented. If <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:</a> is used, implementation is optional.</p>
+@attention method is considered critical and must be implemented. If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID or <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:</a> is used, implementation is optional.</p>
 
 <pre><code>
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -735,7 +842,7 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 			
 			<div class="method-subsection brief-description">
 				<p>Appoxee on registration progress.
-@attention method is considered critical and must be implemented. If <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:</a> is used, implementation is optional.</p>
+@attention method is considered critical and must be implemented. If <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:</a> or <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:</a> is used, implementation is optional.</p>
 
 <pre><code>
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
@@ -799,7 +906,7 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 			
 			<div class="method-subsection brief-description">
 				<p>Use this method to pass information to Appoxee Manager regarding incoming push notifications.
-@attention method is considered critical and must be implemented. If <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:</a> is used, implementation is optional.</p>
+@attention method is considered critical and must be implemented. If <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:</a> or <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:</a> is used, implementation is optional.</p>
 
 <pre><code>
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -863,7 +970,7 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 			
 			<div class="method-subsection brief-description">
 				<p>Implementation of this method enables ‘Push Actions’. Forward this call to Appoxee directly and call completionHandler(); if the returned value is NO, since Appoxee will not handle a complete custom action provided by the developer.
-@attention If <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:</a> is used, implementation is optional.</p>
+@attention If <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:</a> or <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:</a> is used, implementation is optional.</p>
 
 <pre><code>
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler
@@ -888,17 +995,17 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 				
 					<tr>
 						<th scope="row" class="argument-name"><code>identifier</code></th>
-						<td><p>The identifier argument passed by the application delegate.</p></td>
+						<td><p>The identifier argument passed by the application <a href="#//api/name/delegate">delegate</a>.</p></td>
 					</tr>
 				
 					<tr>
 						<th scope="row" class="argument-name"><code>userInfo</code></th>
-						<td><p>The userInfo argument passed by the application delegate.</p></td>
+						<td><p>The userInfo argument passed by the application <a href="#//api/name/delegate">delegate</a>.</p></td>
 					</tr>
 				
 					<tr>
 						<th scope="row" class="argument-name"><code>completionHandler</code></th>
-						<td><p>The completionHandler argument passed by the application delegate.</p></td>
+						<td><p>The completionHandler argument passed by the application <a href="#//api/name/delegate">delegate</a>.</p></td>
 					</tr>
 				
 				</table>
@@ -942,7 +1049,7 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 			
 			<div class="method-subsection brief-description">
 				<p>Implementation of this method enables Appoxee to fetch new data, or update a geo location, while in background. If completionHandler is nil, Appoxee assumes the developer also has work to perform, and by this Appoxee will NOT call the completionHandler, but it will provide a UIBackgroundFetchResult as an NSNumber argument in the AppoxeeCompletionHandler block. Application’s plist must contain a ‘remote-notification’ value in ‘UIBackgroundModes’.
-@attention If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret: is used, implementation is optional.</p>
+@attention If engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID: or engageAndAutoIntegrateWithLaunchOptions:andDelegate: is used, implementation is optional.</p>
 
 <pre><code>
 // 1.
@@ -1053,7 +1160,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 			
 			
 			<div class="method-subsection brief-description">
-				<p>Implementation of this method enables Appoxee to fetch new data, or update a geo location, while in background. If fetchHandler is nil, Appoxee assumes the developer also has work to perform, and by this Appoxee will NOT call the fetchHandler, but it will provide a UIBackgroundFetchResult as an NSNumber argument in the <a href="../Blocks/AppoxeeCompletionHandler.html">AppoxeeCompletionHandler</a> block. Application’s plist must contain a ‘fetch’ value in ‘UIBackgroundModes’. @attention If <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:andAppSecret:</a> is used, implementation is optional.</p>
+				<p>Implementation of this method enables Appoxee to fetch new data, or update a geo location, while in background. If fetchHandler is nil, Appoxee assumes the developer also has work to perform, and by this Appoxee will NOT call the fetchHandler, but it will provide a UIBackgroundFetchResult as an NSNumber argument in the <a href="../Blocks/AppoxeeCompletionHandler.html">AppoxeeCompletionHandler</a> block. Application’s plist must contain a ‘fetch’ value in ‘UIBackgroundModes’.
+@attention If <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:andSDKID:</a> or <a href="#//api/name/engageAndAutoIntegrateWithLaunchOptions:andDelegate:">engageAndAutoIntegrateWithLaunchOptions:andDelegate:</a> is used, implementation is optional.</p>
 
 <pre><code>
 // 1.
@@ -2519,6 +2627,68 @@ An NSString object representing an alias.</p>
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/deviceInfo" title="deviceInfo"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deviceInfo">&ndash;&nbsp;deviceInfo</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Method gets information on the current iDevice.</p>
+
+<pre><code>
+    // Note that calling this method prior to device registration will provide basic information regarding this device.
+    // Developers should prefare using deviceInformationwithCompletionHandler:
+    APXClientDevice *device = [[Appoxee shared] deviceInfo];
+</pre>
+
+
+<p></code></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nonnull APXClientDevice *)deviceInfo</code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>APXClientDevice</code></th>
+						<td><p>an instance that describes this device.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Appoxee.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/deviceInformationwithCompletionHandler:" title="deviceInformationwithCompletionHandler:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/deviceInformationwithCompletionHandler:">&ndash;&nbsp;deviceInformationwithCompletionHandler:</a></code>
 </h3>
@@ -2549,73 +2719,6 @@ An NSString object representing an alias.</p>
 		    
 
 			<div class="method-subsection method-declaration"><code>- (void)deviceInformationwithCompletionHandler:(nullable AppoxeeCompletionHandler)<em>handler</em></code></div>
-
-		    
-			
-			<div class="method-subsection arguments-section parameters">
-				<h4 class="method-subtitle parameter-title">Parameters</h4>
-				<table class="argument-def parameter-def">
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>handler</code></th>
-						<td><p>Code Block to be executed when method completes with an NSError object and data as arguments.</p></td>
-					</tr>
-				
-				</table>
-			</div>
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-			<div class="method-subsection declared-in-section">
-				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">Appoxee.h</code></p>
-			</div>
-			
-			
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/showFeedbackWithCompletionHandler:" title="showFeedbackWithCompletionHandler:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/showFeedbackWithCompletionHandler:">&ndash;&nbsp;showFeedbackWithCompletionHandler:</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-			
-			<div class="method-subsection brief-description">
-				<p>Method fetches HTML string, to be displayed by the developer, on top of the current UIViewController.</p>
-
-<pre><code>
-[[Appoxee shared] showFeedbackWithCompletionHandler:^(NSError *appoxeeError, id data) {
-
-    if (!appoxeeError) {
-
-        NSString *html = (NSString *)data;
-        // Use the url provided, and display it.
-    }
-}];
-</pre>
-
-
-<p></code></p>
-			</div>
-			
-		    
-
-			<div class="method-subsection method-declaration"><code>- (void)showFeedbackWithCompletionHandler:(nullable AppoxeeCompletionHandler)<em>handler</em></code></div>
 
 		    
 			
@@ -2862,7 +2965,7 @@ An NSString object representing an alias.</p>
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2016 Teradata. All rights reserved. Updated: 2016-07-05</p>
+						<p class="copyright">Copyright &copy; 2016 Teradata. All rights reserved. Updated: 2016-07-07</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

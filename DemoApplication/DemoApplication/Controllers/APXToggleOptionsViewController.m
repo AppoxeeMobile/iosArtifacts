@@ -25,8 +25,6 @@
     [super viewDidLoad];
 
     self.title = @"Opt in - out";
-    self.startTextField.delegate = self;
-    self.endTextField.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated

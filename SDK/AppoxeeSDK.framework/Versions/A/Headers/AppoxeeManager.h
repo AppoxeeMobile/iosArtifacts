@@ -21,14 +21,14 @@
  @brief Method will transfer SDK ID data to Appoxee Manager.
  @return NSString representation of the SDK ID.
  */
-- (nonnull NSString *)appoxeeDelegateAppSDKID DEPRECATED_MSG_ATTRIBUTE("using engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret does not require implementing this method");
+- (nonnull NSString *)AppoxeeDelegateAppSDKID DEPRECATED_MSG_ATTRIBUTE("using engageWithLaunchOptions:andDelegate:andSDKID: does not require implementing this method");
 
 /**
  Provide Appoxee with an App Secret.
  @brief Method will transfer App Secret data to Appoxee Manager.
  @return NSString representation of the App Secret.
  */
-- (nonnull NSString *)appoxeeDelegateAppSecret DEPRECATED_MSG_ATTRIBUTE("using engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret does not require implementing this method");
+- (nonnull NSString *)AppoxeeDelegateAppSecret DEPRECATED_MSG_ATTRIBUTE("using engageWithLaunchOptions:andDelegate:andSDKID: does not require implementing this method");
 
 @optional
 /**
@@ -65,19 +65,19 @@
 /**
  Method for initializaing Appoxee Manager.
  @brief Initialize Appoxee Manager with a Delegate and launchOptions.
- @see engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret:
+ @see engageWithLaunchOptions:andDelegate:andSDKID:
  @param delegate A Delegate which implements AppoxeeDelegate protocol.
  @param options NSDictionay containing options for AppoxeeManager provided by the implementing developer.
  */
-- (void)initManagerWithDelegate:(nullable id<AppoxeeDelegate>)delegate andOptions:(nullable NSDictionary *)options DEPRECATED_MSG_ATTRIBUTE("use engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret instead.");
+- (void)initManagerWithDelegate:(nullable id<AppoxeeDelegate>)delegate andOptions:(nullable NSDictionary *)options DEPRECATED_MSG_ATTRIBUTE("use engageWithLaunchOptions:andDelegate:andSDKID: instead.");
 
 /**
  Method for parsing launchOptions by Appoxee Manager.
  @brief Parse launchOptions by Appoxee Manager.
- @see engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret:
+ @see engageWithLaunchOptions:andDelegate:andSDKID:
  @param launchOptions NSDictionay containing launchOptions for AppoxeeManager provided by ApplicationDidLaunch method.
  */
-- (void)managerParseLaunchOptions:(nullable NSDictionary *)launchOptions  DEPRECATED_MSG_ATTRIBUTE("use engageWithLaunchOptions:andDelegate:andSDKID:andAppSecret instead.");
+- (void)managerParseLaunchOptions:(nullable NSDictionary *)launchOptions  DEPRECATED_MSG_ATTRIBUTE("use engageWithLaunchOptions:andDelegate:andSDKID: instead.");
 
 #pragma mark - Push Handling Legacy
 
@@ -89,6 +89,24 @@
  @return YES, always returns YES.
  */
 - (BOOL)didReceiveRemoteNotification:(nullable NSDictionary *)userInfo DEPRECATED_MSG_ATTRIBUTE("use receivedRemoteNotification: instead.");
+
+/**
+ Method for notifing AppoxeeManager a token was received.
+ @brief Use this method for notifing AppoxeeManager a token was received.
+ @see didRegisterForRemoteNotificationsWithDeviceToken:
+ @param token NSData object containing user token.
+ */
+- (void)didRegisterForRemoteNotificationsWithDeviceToken:(nonnull NSData *)token DEPRECATED_MSG_ATTRIBUTE("use didRegisterForRemoteNotificationsWithDeviceToken: instead.");
+
+/**
+ Method for handling 'Push Actions'. Forward this call to Appoxee directly and call completionHandler(); if the returned value is NO, since Appoxee will not handle a complete custom action provided by the developer.
+ @brief Implementation of this method enables ‘Push Actions’. Forward this call to Appoxee directly and call completionHandler(); if the returned value is NO, since Appoxee will not handle a complete custom action provided by the developer.
+ @param identifier The identifier argument passed by the application delegate.
+ @param userInfo The userInfo argument passed by the application delegate.
+ @param completionHandler The completionHandler argument passed by the application delegate.
+ @return YES, if Appoxee handled the action, else returns NO. If the returned value is NO, you will need to call completionHandler(); after you finish handling the Push action.
+ */
+- (BOOL)handleActionWithIdentifier:(nullable NSString *)identifier forRemoteNotification:(nonnull NSDictionary *)userInfo completionHandler:(void (^ _Nullable)())completionHandler DEPRECATED_MSG_ATTRIBUTE("use handleActionWithIdentifier:forRemoteNotification:completionHandler: instead.");
 
 #pragma mark - Device API Legacy
 
@@ -302,5 +320,67 @@
  @return NSArray with APXRichMessage instances.
  */
 - (nullable NSArray *)getInboxMessages DEPRECATED_MSG_ATTRIBUTE("use getRichMessagesWithHandler: or refreshDataWithCompletionHandler: instead.");
+
+#pragma mark - Other Legacy
+
+/* 
+ * All methods below are deprecated.
+ * Methods which return an instance, will always return nil.
+ * Methods which return a BOOL, will always return NO.
+ * Method which return an int, will always return 0.
+ */
+- (void)disableFeedbackAndMoreApps:(BOOL)shouldDisable DEPRECATED_ATTRIBUTE;
+- (nullable NSString *)getServerV3URL DEPRECATED_ATTRIBUTE;
+- (nullable NSString *)getGateKeeperURL DEPRECATED_ATTRIBUTE;
+- (nullable NSString *)getServerV2URL DEPRECATED_ATTRIBUTE;
+- (nullable NSString *)getMoreAppsURL DEPRECATED_ATTRIBUTE;
+- (nullable NSString *)getFeedbackURL DEPRECATED_ATTRIBUTE;
+- (nullable NSString *)getDeviceDefURL DEPRECATED_ATTRIBUTE;
+- (nullable NSString *)getDeviceAdsURL DEPRECATED_ATTRIBUTE;
+- (nullable NSArray *)setAttributeWithDict:(nullable NSMutableDictionary *)param andKey:(nullable NSString*)keyParam DEPRECATED_ATTRIBUTE;
+- (nullable NSString *)getAttribute:(nullable NSString *)param DEPRECATED_ATTRIBUTE;
+- (void)configureAppoxeeForLocale:(nullable NSString *)theLocale DEPRECATED_ATTRIBUTE;
+- (void)optOutQuietTime DEPRECATED_ATTRIBUTE;
+- (void)SplashScreen DEPRECATED_ATTRIBUTE;
+- (void)optOutBadge:(BOOL)flag DEPRECATED_ATTRIBUTE;
+- (void)optOutSound:(BOOL)flag DEPRECATED_ATTRIBUTE;
+- (UIRemoteNotificationType)getNotificationStatus DEPRECATED_ATTRIBUTE;
+- (void)setQuietTime:(nullable NSString *)startTimeParam endTime:(nullable NSString *)endTimeParam DEPRECATED_ATTRIBUTE;
+- (nullable NSString *) getSplashScreen DEPRECATED_ATTRIBUTE;
+- (nullable NSString *) getPoweredByImageLink DEPRECATED_ATTRIBUTE;
+- (nullable NSString *)getQuietTimeStart DEPRECATED_ATTRIBUTE;
+- (nullable NSString *)getQuietTimeEnd DEPRECATED_ATTRIBUTE;
+- (void)setSoundEnabled:(BOOL)enabled DEPRECATED_ATTRIBUTE;
+- (void)setBadgeEnabled:(BOOL)enabled DEPRECATED_ATTRIBUTE;
+- (BOOL)isCoppaShown DEPRECATED_ATTRIBUTE;
+- (BOOL)isSoundEnabled DEPRECATED_ATTRIBUTE;
+- (BOOL)isBadgeEnabled DEPRECATED_ATTRIBUTE;
+- (int)getDeviceActivations DEPRECATED_ATTRIBUTE;
+- (nullable NSDecimalNumber *) getInAppPayment DEPRECATED_ATTRIBUTE;
+- (int)getNumProductsPurchased DEPRECATED_ATTRIBUTE;
+- (BOOL)increaseInAppPayment:(nullable NSDecimalNumber *)payment andNumPurchased:(nullable NSDecimalNumber *)numPurchased DEPRECATED_ATTRIBUTE;
+- (BOOL)increaseNumProductPurchased:(nullable NSDecimalNumber *)payment DEPRECATED_ATTRIBUTE;
+- (int)getInboxFlag DEPRECATED_ATTRIBUTE;
+- (int)getCustomInboxFlag DEPRECATED_ATTRIBUTE;
+- (int)getFeedbackFlag DEPRECATED_ATTRIBUTE;
+- (int)getMoreAppsFlag DEPRECATED_ATTRIBUTE;
+- (void)openAppoxeeMessage:(nullable id)appoxeeMessage DEPRECATED_ATTRIBUTE;
+- (void)addBadgeToView:(nullable UIView *)badgeView badgeText:(nullable NSString *)badgeText badgeLocation:(CGPoint)badgeLocation DEPRECATED_ATTRIBUTE;
+- (void)addBadgeToView:(nullable UIView *)badgeView badgeText:(nullable NSString *)badgeText badgeLocation:(CGPoint)badgeLocation shouldFlashBadge:(BOOL)shouldFlashBadge DEPRECATED_ATTRIBUTE;
+- (void)addBadgeToView:(nullable UIView *)badgeView badgeText:(nullable NSString *)badgeText badgeLocation:(CGPoint)badgeLocation shouldFlashBadge:(BOOL)shouldFlashBadge withFontSize:(float)fontSize DEPRECATED_ATTRIBUTE;
+- (void)show DEPRECATED_ATTRIBUTE;
+- (BOOL)showMoreAppsViewController DEPRECATED_ATTRIBUTE;
+- (BOOL)showFeedbackViewController DEPRECATED_ATTRIBUTE;
+- (void)showMoreAppsOnInbox:(BOOL)show DEPRECATED_ATTRIBUTE;
+- (void)showFeedbackOnInbox:(BOOL)show DEPRECATED_ATTRIBUTE;
+- (nullable UIViewController *)getAppoxeeViewController DEPRECATED_ATTRIBUTE;
+- (nullable UIViewController *)getAppoxeeMoreAppsViewController DEPRECATED_ATTRIBUTE;
+- (nullable UIViewController *)getAppoxeeFeedbackViewController DEPRECATED_ATTRIBUTE;
+- (void)recalculateUnreadMessagesBadge DEPRECATED_ATTRIBUTE;
+- (void)setUsingCustomInbox:(BOOL)isCustom DEPRECATED_ATTRIBUTE;
+- (BOOL)getUsingCustomInboxFlag DEPRECATED_ATTRIBUTE;
+- (void)showCustomInbox:(BOOL)show DEPRECATED_ATTRIBUTE;
++ (void)automaticallyClearNotifications:(BOOL)automatically DEPRECATED_ATTRIBUTE;
++ (BOOL)isNotificationsClearedAutomatically DEPRECATED_ATTRIBUTE;
 
 @end

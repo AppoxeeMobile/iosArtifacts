@@ -104,11 +104,6 @@
             cell.textLabel.text = @"Show Feedback";
         }
             break;
-        case AppoxeeActionTypeMoreApps:
-        {
-            cell.textLabel.text = @"Show More Apps";
-        }
-            break;
         case AppoxeeActionTypeInbox:
         {
             cell.textLabel.text = @"Custom Inbox";

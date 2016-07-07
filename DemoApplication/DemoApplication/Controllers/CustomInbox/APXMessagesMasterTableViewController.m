@@ -109,7 +109,7 @@
 {
     [self.refreshControler beginRefreshing];
     
-    [[AppoxeeManager sharedManager] refreshInboxWithCompletionHandler:^(NSError *appoxeeError, id data) {
+    [[Appoxee shared] refreshInboxWithCompletionHandler:^(NSError *appoxeeError, id data) {
         
         [self.refreshControler endRefreshing];
         
@@ -322,7 +322,7 @@
         APXRichMessage *message = self.messages[indexPath.row];
         
         [self.messages removeObject:message];
-        [[AppoxeeManager sharedManager] deleteRichMessage:message withHandler:nil];
+        [[Appoxee shared] deleteRichMessage:message withHandler:nil];
                     
         [self.tableView beginUpdates];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -454,7 +454,7 @@
     
     for (APXRichMessage *message in tmpMessages) {
         
-        [[AppoxeeManager sharedManager] deleteRichMessage:message withHandler:nil];
+        [[Appoxee shared] deleteRichMessage:message withHandler:nil];
     }
     
     [self.messages removeObjectsInArray:tmpMessages];

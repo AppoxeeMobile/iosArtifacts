@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		926102BD1D2E66F900C982EA /* AppoxeeConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 926102BC1D2E66F900C982EA /* AppoxeeConfig.plist */; };
 		9298E4ED1B2DA383006B19C0 /* APXLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9298E4EC1B2DA383006B19C0 /* APXLogTableViewCell.m */; };
 		92E759A21B208D7900E60EEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E759A11B208D7900E60EEF /* main.m */; };
 		92E759A51B208D7900E60EEF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E759A41B208D7900E60EEF /* AppDelegate.m */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		926102BC1D2E66F900C982EA /* AppoxeeConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppoxeeConfig.plist; sourceTree = "<group>"; };
 		9298E4EB1B2DA383006B19C0 /* APXLogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APXLogTableViewCell.h; path = Views/APXLogTableViewCell.h; sourceTree = "<group>"; };
 		9298E4EC1B2DA383006B19C0 /* APXLogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APXLogTableViewCell.m; path = Views/APXLogTableViewCell.m; sourceTree = "<group>"; };
 		92E7599C1B208D7900E60EEF /* DemoApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 		92E7599E1B208D7900E60EEF /* DemoApplication */ = {
 			isa = PBXGroup;
 			children = (
+				926102BC1D2E66F900C982EA /* AppoxeeConfig.plist */,
 				92E759A31B208D7900E60EEF /* AppDelegate.h */,
 				92E759A41B208D7900E60EEF /* AppDelegate.m */,
 				92E759A91B208D7900E60EEF /* Main.storyboard */,
@@ -333,7 +336,7 @@
 		92E759941B208D7900E60EEF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Teradata;
 				TargetAttributes = {
 					92E7599B1B208D7900E60EEF = {
@@ -370,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92E759AB1B208D7900E60EEF /* Main.storyboard in Resources */,
+				926102BD1D2E66F900C982EA /* AppoxeeConfig.plist in Resources */,
 				92E759B01B208D7900E60EEF /* LaunchScreen.xib in Resources */,
 				92E759AD1B208D7900E60EEF /* Images.xcassets in Resources */,
 			);
@@ -467,6 +471,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -535,9 +540,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DemoApplication/Frameworks",
+					"$(PROJECT_DIR)/DemoApplication",
 				);
 				INFOPLIST_FILE = DemoApplication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teradata.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -549,9 +556,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DemoApplication/Frameworks",
+					"$(PROJECT_DIR)/DemoApplication",
 				);
 				INFOPLIST_FILE = DemoApplication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teradata.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -570,6 +579,7 @@
 				);
 				INFOPLIST_FILE = DemoApplicationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teradata.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DemoApplication.app/DemoApplication";
 			};
@@ -585,6 +595,7 @@
 				);
 				INFOPLIST_FILE = DemoApplicationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teradata.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DemoApplication.app/DemoApplication";
 			};

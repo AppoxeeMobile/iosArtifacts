@@ -18,32 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[Appoxee shared] engageWithLaunchOptions:launchOptions andDelegate:self andSDKID:nil andAppSecret:nil];
+    [[Appoxee shared] engageAndAutoIntegrateWithLaunchOptions:launchOptions andDelegate:self];
     
     return YES;
-}
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    [[Appoxee shared] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    [[Appoxee shared] receivedRemoteNotification:userInfo];
-}
-
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-    [[Appoxee shared] didRegisterUserNotificationSettings:notificationSettings];
-}
-
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler
-{
-    // Must be implemented in order to enable 'Push Actions'.
-    BOOL didHandle = [[Appoxee shared] handleActionWithIdentifier:identifier forRemoteNotification:userInfo completionHandler:completionHandler];
-    
-    if (!didHandle) { completionHandler(); } // Handle the action in case it is not handled by Appoxee. When done - completionHandler() must be called.
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

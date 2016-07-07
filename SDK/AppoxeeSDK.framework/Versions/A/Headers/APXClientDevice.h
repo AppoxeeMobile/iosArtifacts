@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *timeZone; // Asia / Jerusalem
 @property (nonatomic, strong) NSString *pushToken;
 @property (nonatomic, strong) NSString *udid;
+@property (nonatomic, strong) NSString *udidHashed;
 @property (nonatomic, strong) NSString *osName;
 @property (nonatomic, strong) NSString *osVersion;
 @property (nonatomic, strong) NSString *hardwearType;

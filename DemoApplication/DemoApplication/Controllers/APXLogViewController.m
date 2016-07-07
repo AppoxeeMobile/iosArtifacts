@@ -179,7 +179,7 @@
             break;
         case 8:
         {
-            title = [NSString stringWithFormat:@"%@", self.device.applicatoinID];
+            title = [NSString stringWithFormat:@"%@", self.device.applicationID];
         }
             break;
         case 9:

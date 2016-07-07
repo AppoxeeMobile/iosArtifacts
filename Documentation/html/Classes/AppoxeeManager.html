@@ -70,6 +70,8 @@
 		
 		<option value="//api/name/didReceiveRemoteNotification:">- didReceiveRemoteNotification:</option>
 		
+		<option value="//api/name/didRegisterForRemoteNotificationsWithDeviceToken:">- didRegisterForRemoteNotificationsWithDeviceToken:</option>
+		
 		<option value="//api/name/getApplicationID">- getApplicationID</option>
 		
 		<option value="//api/name/getCustomFieldByKey:">- getCustomFieldByKey:</option>
@@ -91,6 +93,8 @@
 		<option value="//api/name/getInboxMessages">- getInboxMessages</option>
 		
 		<option value="//api/name/getTagList">- getTagList</option>
+		
+		<option value="//api/name/handleActionWithIdentifier:forRemoteNotification:completionHandler:">- handleActionWithIdentifier:forRemoteNotification:completionHandler:</option>
 		
 		<option value="//api/name/incNumericFields:">- incNumericFields:</option>
 		
@@ -308,6 +312,136 @@
 			<div class="method-subsection return">
 				<h4 class="method-subtitle parameter-title">Return Value</h4>
 				<p>YES, always returns YES.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AppoxeeManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/didRegisterForRemoteNotificationsWithDeviceToken:" title="didRegisterForRemoteNotificationsWithDeviceToken:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/didRegisterForRemoteNotificationsWithDeviceToken:">&ndash;&nbsp;didRegisterForRemoteNotificationsWithDeviceToken:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Use this method for notifing AppoxeeManager a token was received.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)didRegisterForRemoteNotificationsWithDeviceToken:(nonnull NSData *)<em>token</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>token</code></th>
+						<td><p>NSData object containing user token.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="#//api/name/didRegisterForRemoteNotificationsWithDeviceToken:">- didRegisterForRemoteNotificationsWithDeviceToken:</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AppoxeeManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/handleActionWithIdentifier:forRemoteNotification:completionHandler:" title="handleActionWithIdentifier:forRemoteNotification:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/handleActionWithIdentifier:forRemoteNotification:completionHandler:">&ndash;&nbsp;handleActionWithIdentifier:forRemoteNotification:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Implementation of this method enables ‘Push Actions’. Forward this call to <a href="../Classes/Appoxee.html">Appoxee</a> directly and call completionHandler(); if the returned value is NO, since <a href="../Classes/Appoxee.html">Appoxee</a> will not handle a complete custom action provided by the developer.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)handleActionWithIdentifier:(nullable NSString *)<em>identifier</em> forRemoteNotification:(nonnull NSDictionary *)<em>userInfo</em> completionHandler:(void ( ^ _Nullable ) ( ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The identifier argument passed by the application delegate.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>userInfo</code></th>
+						<td><p>The userInfo argument passed by the application delegate.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>The completionHandler argument passed by the application delegate.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>YES, if <a href="../Classes/Appoxee.html">Appoxee</a> handled the action, else returns NO. If the returned value is NO, you will need to call completionHandler(); after you finish handling the Push action.</p>
 			</div>
 			
 
@@ -1712,7 +1846,7 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2016 Teradata. All rights reserved. Updated: 2016-07-05</p>
+						<p class="copyright">Copyright &copy; 2016 Teradata. All rights reserved. Updated: 2016-07-07</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
