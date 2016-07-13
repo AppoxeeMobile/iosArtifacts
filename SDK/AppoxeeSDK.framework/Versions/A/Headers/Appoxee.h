@@ -113,22 +113,6 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 - (void)engageAndAutoIntegrateWithLaunchOptions:(nullable NSDictionary *)launchOptions andDelegate:(nullable id<AppoxeeNotificationDelegate>)delegate;
 
 /**
- Method auto integrate and engage with Appoxee SDK.
- @brief Call this method to perform auto integration of your AppDelegate file, and to engage with Appoxee SDK. 
- @attention Method is considered critical, and must be implemented.
- @code
- - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
- {
-    [[Appoxee shared] engageAndAutoIntegrateWithLaunchOptions:launchOptions andDelegate:self andSDKID:@"123"];
-    return YES;
- }
- @endcode
- @param launchOptions NSDictionary which contains the launchOptions of didFinishLaunchingWithOptions AppDelegate method.
- @param delegate An object which conforms to AppoxeeDelegate Protocol.
- @param sdkID NSString representation of the SDK ID.
- */
-- (void)engageAndAutoIntegrateWithLaunchOptions:(nullable NSDictionary *)launchOptions andDelegate:(nullable id<AppoxeeNotificationDelegate>)delegate andSDKID:(nonnull NSString *)sdkID;
-/**
  Method for engaging Appoxee SDK.
  @brief Call this method to engage Appoxee SDK in your application. 
  @attention Method is considered critical, and must be implemented.
@@ -343,7 +327,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Disable and re-enable Inbox.
  @brief Method disables or re-enables Inbox. 
- @attention Method does not un-register sound from push notifications, but opts-out the device sound from Push Services at Appoxee dashboard.
+ @attention Standalone Feature. Method does not un-register sound from push notifications, but opts-out the device sound from Push Services at Appoxee dashboard.
  @code
  [[Appoxee shared] disableInbox:booleanArgument completionHwithCompletionHandlerandler:^(NSError *appoxeeError, id data) {
  
@@ -362,7 +346,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Get the current state of the Inbox.
  @brief Method to get the current state of Inbox. 
- @attention Method fetches opt-out status of the device inbox from Push Services at Appoxee dashboard.
+ @attention Standalone Feature. Method fetches opt-out status of the device inbox from Push Services at Appoxee dashboard.
  @code
  [[Appoxee shared] isInboxEnabled:^(NSError *appoxeeError, id data) {
  
@@ -450,6 +434,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Get the device tags from Appoxee's servers
  @brief Method gets the device tags from the Appoxee servers.
+ @attention Standalone Feature.
  @code
  [[Appoxee shared] fetchDeviceTags:^(NSError *appoxeeError, id data) {
  
@@ -467,6 +452,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Get the application tags from Appoxee's servers
  @brief Method gets the appilcation tags from the Appoxee servers.
+ @attention Standalone Feature.
  @code
  [[Appoxee shared] fetchApplicationTags:^(NSError *appoxeeError, id data) {
  
@@ -484,6 +470,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Add Tags to a device.
  @brief Method adds tags to a device. Method may return in the callback an error with APX_DataService domain value. This means that the operation was successfully completed, but with errors. The errors indicate if the operation triggered a server update. Operations such as adding an existing device tag, or passing an empty array, will trigger such APX_DataService errors. Any other error with a different domain indicates an unsuccessful operation.
+ @attention Standalone Feature.
  @code
  [[Appoxee shared] addTagsToDevice:@[@"firstTag", @"secondTag"] withCompletionHandler:^(NSError *appoxeeError, id data) {
  
@@ -502,6 +489,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Remove Tags from a device.
  @brief Method removes tags from a device. Method may return in the callback an error with APX_DataService domain value. This means that the operation was successfully completed, but with errors. The errors indicate if the operation triggered a server update. Operations such as adding an existing device tag, or passing an empty array, will trigger such APX_DataService errors. Any other error with a different domain indicates an unsuccessful operation.
+ @attention Standalone Feature.
  @code
  [[Appoxee shared] removeTagsFromDevice:@[@"firstTag", @"secondTag"] withCompletionHandler:^(NSError *appoxeeError, id data) {
  
@@ -520,6 +508,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Add Tags to a device and remove tags from a device.
  @brief Method adds tags to a device and removes tags from a device. Method may return in the callback an error with APX_DataService domain value. This means that the operation was successfully completed, but with errors. The errors indicate if the operation triggered a server update. Operations such as adding an existing device tag, or passing an empty array, will trigger such APX_DataService errors. Any other error with a different domain indicates an unsuccessful operation.
+ @attention Standalone Feature.
  @code
  [[Appoxee shared] addTagsToDevice:@[@"firstTag", @"secondTag"] andRemove:@[@"thirdTag", @"fourthTag"]  withCompletionHandler:^(NSError *appoxeeError, id data) {
  
@@ -539,6 +528,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Clear device tags cached on device.
  @brief Method will clear the device tags cache.
+ @attention Standalone Feature.
  @code
  [[Appoxee shared] clearTagsCacheWithCompletionhandler:^(NSError *appoxeeError, id data) {
  
@@ -566,7 +556,8 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
     }
  }];
  @endcode
- @param dateDictionary NSDictionary with an NSDate as a value. Note that only the first key-value pair in the dictionary will be handled.
+ @param date an NSDate instance representing a date.
+ @param key an NSString instance representing a key.
  @param handler Code Block to be executed when method completes with an NSError object and data as arguments.
  */
 - (void)setDateValue:(nonnull NSDate *)date forKey:(nonnull NSString *)key withCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
@@ -583,7 +574,8 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
     }
  }];
  @endcode
- @param numericDictionary NSDictionary with an NSNumber as a value. Note that only the first key-value pair in the dictionary will be handled.
+ @param number an NSNumber instance representing a number.
+ @param key an NSString instance representing a key.
  @param handler Code Block to be executed when method completes with an NSError object and data as arguments.
  */
 - (void)setNumberValue:(nonnull NSNumber *)number forKey:(nonnull NSString *)key withCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
@@ -591,6 +583,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 /**
  Increment a custom number for a key to Appoxee Servers.
  @brief Method increments a custom value of NSNumber to Appoxee Servers. Value is added to an existing key, or else a new entry is created.
+ @attantion If key doesn't exist, a new key and value will be set.
  @code
  [[Appoxee shared] incrementNumericKey:@"key" byNumericValue:@(1.6) withCompletionHandler:^(NSError * _Nullable appoxeeError, id  _Nullable data) {
  
@@ -600,7 +593,8 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
     }
  }];
  @endcode
- @param incrementalNumericDictionary NSDictionary with an NSNumber as a value. Value is will be added to an existing key, else a new key will be created. Note that only the first key-value pair in the dictionary will be handled.
+ @param key an NSString instance representing a key.
+ @param number an NSNumber instance representing a number.
  @param handler Code Block to be executed when method completes with an NSError object and data as arguments.
  */
 - (void)incrementNumericKey:(nonnull NSString *)key byNumericValue:(nonnull NSNumber *)number withCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
@@ -617,7 +611,8 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
     }
  }];
  @endcode
- @param stringDictionary NSDictionary with an NSString as a value. Note that only the first key-value pair in the dictionary will be handled.
+ @param string NSString instance representing a string.
+ @param key an NSString instance representing a key.
  @param handler Code Block to be executed when method completes with an NSError object and data as arguments.
  */
 - (void)setStringValue:(nonnull NSString *)string forKey:(nonnull NSString *)key withCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
@@ -695,6 +690,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Inbox API for getting Inbox Messages.
  @brief Method for getting all of the Rich messages associated with a device.
+ @attention Standalone Feature.
  @code
  [[Appoxee shared] getRichMessagesWithHandler:^(NSError *appoxeeError, id data) {
  
@@ -712,6 +708,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Inbox API for deleting a Rich Message.
  @brief Method that deletes a Rich Message from Inbox.
+ @attention Standalone Feature.
  @code
  [[Appoxee shared] deleteRichMessage:richMessage withHandler:^(NSError *appoxeeError, id data) {
  
@@ -728,6 +725,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Standalone Feature
  Refresh Inbox Messages while syncing with Appoxee Servers.
  @brief Method refreshes Inbox Rich Messages while synching data with Appoxee Servers.
+ @attention Standalone Feature.
  @code
  [[Appoxee shared] refreshInboxWithCompletionHandler:^(NSError *appoxeeError, id data) {
  

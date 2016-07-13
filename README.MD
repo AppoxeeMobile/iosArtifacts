@@ -1,4 +1,4 @@
-Appoxee SDK - US
+Appoxee SDK
 ===========
 This repository contains the Appoxee iOS SDK.
 
@@ -18,7 +18,7 @@ end
 
 ```ruby
 target 'project_name' do
-    pod 'AppoxeeSDK', :git => 'https://github.com/AppoxeeMobile/iosArtifacts.git', :tag => '4.0.12'
+    pod 'AppoxeeSDK', :git => 'https://github.com/AppoxeeMobile/iosArtifacts.git', :tag => '4.0.13'
 end
 ```
 
@@ -39,13 +39,25 @@ Make sure to provide an ```AppoxeeConfiguration.plist``` file.
 <dict>
     <key>sdk</key>
     <dict>
-        <key>dmc_system_id</key>
-        <integer>11111111</integer>
         <key>sdk_key</key>
         <string>222222222.2222</string>
+        <key>is_eu</key> <!-- Indicate if account is EU / US -->
+        <false/>
     </dict>
 </dict>
 </plist>
+```
+
+Implementation
+--------------
+
+```objective-c
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [[Appoxee shared] engageAndAutoIntegrateWithLaunchOptions:launchOptions andDelegate:nil];
+
+    return YES;
+}
 ```
 
 License
