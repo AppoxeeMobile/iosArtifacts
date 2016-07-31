@@ -42,7 +42,7 @@ Make sure to provide an ```AppoxeeConfiguration.plist``` file.
     <key>sdk</key>
     <dict>
         <key>sdk_key</key>
-        <string>222222222.2222</string>
+        <string>123456789.00</string>
         <key>is_eu</key> <!-- Indicate if account is EU / US -->
         <false/>
     </dict>
