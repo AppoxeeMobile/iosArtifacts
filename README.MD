@@ -67,7 +67,7 @@ Implementation
 ```swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-    Appoxee.shared()?.engageAndAutoIntegrateWithLaunchOptions(launchOptions, andDelegate: nil);
+    Appoxee.shared()?.engageAndAutoIntegrateWithLaunchOptions(launchOptions, andDelegate: nil)
 
     return true
 }
