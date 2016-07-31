@@ -53,6 +53,7 @@ Make sure to provide an ```AppoxeeConfiguration.plist``` file.
 Implementation
 --------------
 
+*Objective-C*
 ```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -62,6 +63,7 @@ Implementation
 }
 ```
 
+*Swift*
 ```swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
