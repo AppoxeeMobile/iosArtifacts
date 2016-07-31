@@ -53,7 +53,7 @@ Make sure to provide an ```AppoxeeConfiguration.plist``` file.
 Implementation
 --------------
 
-*Objective-C*
+**Objective-C**
 ```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -63,13 +63,13 @@ Implementation
 }
 ```
 
-*Swift*
+**Swift**
 ```swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-Appoxee.shared()?.engageAndAutoIntegrateWithLaunchOptions(launchOptions, andDelegate: nil);
+    Appoxee.shared()?.engageAndAutoIntegrateWithLaunchOptions(launchOptions, andDelegate: nil);
 
-return true
+    return true
 }
 ```
 
