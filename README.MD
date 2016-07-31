@@ -60,6 +60,15 @@ Implementation
 }
 ```
 
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+Appoxee.shared()?.engageAndAutoIntegrateWithLaunchOptions(launchOptions, andDelegate: nil);
+
+return true
+}
+```
+
 License
 -------
 http://www.appoxee.com/terms/
