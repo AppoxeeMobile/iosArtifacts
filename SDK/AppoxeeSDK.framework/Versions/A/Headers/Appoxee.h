@@ -483,7 +483,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  @param tagsToAdd NSArray containing a list of NSString tags.
  @param handler Code Block to be executed when method completes with an NSError object and data as arguments.
  */
-- (void)addTagsToDevice:(nullable NSArray *)tagsToAdd withCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
+- (void)addTagsToDevice:(nullable NSArray <NSString *> *)tagsToAdd withCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
 
 /**
  Standalone Feature
@@ -502,7 +502,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  @param tagsToRemove NSArray containing a list of NSString tags.
  @param handler Code Block to be executed when method completes with an NSError object and data as arguments.
  */
-- (void)removeTagsFromDevice:(nullable NSArray *)tagsToRemove withCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
+- (void)removeTagsFromDevice:(nullable NSArray <NSString *> *)tagsToRemove withCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
 
 /**
  Standalone Feature
@@ -522,7 +522,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  @param tagsToRemove NSArray containing a list of NSString tags.
  @param handler Code Block to be executed when method completes with an NSError object and data as arguments.
  */
-- (void)addTagsToDevice:(nullable NSArray *)tagsToAdd andRemove:(nullable NSArray *)tagsToRemove withCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
+- (void)addTagsToDevice:(nullable NSArray <NSString *> *)tagsToAdd andRemove:(nullable NSArray <NSString *> *)tagsToRemove withCompletionHandler:(nullable AppoxeeCompletionHandler)handler;
 
 /**
  Standalone Feature

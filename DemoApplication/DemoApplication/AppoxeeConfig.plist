@@ -10,6 +10,8 @@
 		<integer>0</integer>
 		<key>sdk_key</key>
 		<string></string>
+        <key>is_eu</key> <!-- Indicate if account is EU / US -->
+        <false/>
 	</dict>
 </dict>
 </plist>

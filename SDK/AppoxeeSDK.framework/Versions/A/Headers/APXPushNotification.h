@@ -22,5 +22,7 @@
 @property (nonatomic, strong, readonly) APXPushNotificationAction *pushAction;
 
 - (id)initWithKeyedValues:(NSDictionary *)keyedValues;
+- (NSDictionary *)pushReportDictionary;
+- (NSDictionary *)richPushReportDictionary;
 
 @end
