@@ -13,7 +13,7 @@
 
 @property (nonatomic, getter = isAppoxeeCategory, readonly) BOOL appoxeeCategory;
 @property (nonatomic, strong, readonly) NSString *categoryName;
-@property (nonatomic, strong, readonly) NSArray *actionButtons; // of Type APXPushNotificationActionButton
+@property (nonatomic, strong, readonly) NSArray <APXPushNotificationActionButton *> *actionButtons;
 
 - (id)initWithKeyedValues:(NSDictionary *)keyedValues;
 

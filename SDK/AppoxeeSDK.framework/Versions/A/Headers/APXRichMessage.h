@@ -16,7 +16,12 @@
 @property (nonatomic, readonly) NSInteger uniqueID;
 
 /*!
- * The post date of the message. Displayed in the device local time.
+ * The post date of the message, in UTC.
+ */
+@property (nonatomic, readonly) NSDate *postDateUTC;
+
+/*!
+ * The post date of the message, in device local time.
  */
 @property (nonatomic, strong, readonly) NSDate *postDate;
 

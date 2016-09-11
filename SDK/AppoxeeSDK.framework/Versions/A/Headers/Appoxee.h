@@ -13,6 +13,8 @@
 #import "APXClientDevice.h"
 
 @class Appoxee;
+@class UNUserNotificationCenter;
+@class UNNotificationResponse;
 
 typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nullable data);
 
@@ -52,6 +54,13 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  * Setting the property should be performed prior to engaging the SDK.
  */
 @property (nonatomic) BOOL postponeNotificationRequest;
+
+/*!
+ * Indicates if Appoxee should show notifications when application is in foreground, on iOS10 and above.
+ * Set this property when ever needed, to change this behavior.
+ * Default value is NO.
+ */
+@property (nonatomic) BOOL showNotificationsOnForeground;
 
 /*!
  * Indicates if the device is registered at Appoxee (but not yet ready for push notifications). You can listen to ‘APX_Ready’ NSNotification to catch this event, or use KVO to get notified when state turns to YES.
@@ -157,7 +166,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  */
 - (void)didRegisterUserNotificationSettings:(nullable UIUserNotificationSettings *)notificationSettings;
 
-#pragma mark - Push Handling
+#pragma mark - Push Handling iOS9
 
 /**
  Method for notifing Appoxee a remote Push Notification was received to the device.
@@ -285,6 +294,30 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  @param completionBlock A completion block which will be called when Appoxee completes it's work, enabling the developer to be notified, in case fetchHandler is nil, and to call the fetchHandler.
  */
 - (void)performFetchWithCompletionHandler:(nullable void (^)(UIBackgroundFetchResult))fetchHandler andNotifyCompletionWithBlock:(nullable AppoxeeCompletionHandler)completionBlock;
+
+#pragma mark - Push Handling ios10
+
+/**
+ Forward UNNotificationResponse to Appoxee. If Implementing UNUserNotificationCenterDelegate on your own, call this method to forward notifications to Appoxee, thus keeping analytics data, or any other push oriented operations going.
+ @brief Forward UNNotificationResponse to Appoxee.
+ @attention Method is required only if you intend to act as the UNUserNotificationCenterDelegate.
+ @code
+ #pragma mark - UNUserNotificationCenterDelegate
+ 
+ - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler
+ {
+    [[Appoxee shared] userNotificationCenter:center didReceiveNotificationResponse:response withAppoxeeCompletionHandler:^{
+ 
+        // Appoxee completed it's work. 
+        completionHandler();
+    }];
+ }
+ @endcode
+ @param center                   The notification center that received the notification.
+ @param response                 The user’s response to the notification. This object contains the original notification and the identifier string for the selected action. If the action allowed the user to provide a textual response, this object is an instance of the UNTextInputNotificationResponse class.
+ @param appoxeeCompletionHandler The block to execute when Appoxee finished processing the notification. The block has no return value or parameters.
+ */
+- (void)userNotificationCenter:(nonnull UNUserNotificationCenter *)center didReceiveNotificationResponse:(nonnull UNNotificationResponse *)response withAppoxeeCompletionHandler:(nullable void (^)())appoxeeCompletionHandler __IOS_AVAILABLE(10.0);
 
 #pragma mark - Device API
 

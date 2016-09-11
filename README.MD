@@ -5,7 +5,7 @@ This repository contains the Appoxee iOS SDK.
 Integration
 -----------
 
-*Cocoa pods
+**Cocoa pods**
 
 ```ruby
 target 'project_name' do
@@ -13,24 +13,26 @@ target 'project_name' do
 end
 ```
 
-*OR*
+**OR**
 
 
 ```ruby
 target 'project_name' do
-    pod 'AppoxeeSDK', :git => 'https://github.com/AppoxeeMobile/iosArtifacts.git', :tag => '4.0.14'
+    pod 'AppoxeeSDK', :git => 'https://github.com/AppoxeeMobile/iosArtifacts.git', :tag => '4.1.0'
 end
 ```
 
-*Manual
+**Manual**
 
-Drag and drop the .framework to your project.
+    * Drag and drop the ```AppoxeeSDK.framework``` to your project.
+    * Drag and drop the ```AppoxeeSDKResources.bundle``` to your project.
+    * Link ```UserNotifications.framework``` to your project.
 
 
 Configuration file
 ------------------
 
-Make sure to provide an ```AppoxeeConfiguration.plist``` file.
+Make sure to provide an ```AppoxeeConfig.plist``` file.
 
 ![Image of AppoxeeConfiguration.plist](https://s3.amazonaws.com/download.appoxee.com/sdk/Images/AppoxeeConfigurationPlist.png)
 
@@ -38,15 +40,17 @@ Make sure to provide an ```AppoxeeConfiguration.plist``` file.
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-    <key>sdk</key>
     <dict>
-        <key>sdk_key</key>
-        <string>123456789.00</string>
-        <key>is_eu</key> <!-- Indicate if account is EU / US -->
-        <false/>
+        <key>sdk</key>
+        <dict>
+            <key>sdk_key</key>
+            <string>123456789.00</string>
+            <key>is_eu</key> <!-- Optional, indicate if account is EU / US -->
+            <false/>
+            <key>open_landing_page_inside_app</key> <!-- Optional, indicate if landing page should open inside the app or via Safari -->
+            <false/>
+        </dict>
     </dict>
-</dict>
 </plist>
 ```
 

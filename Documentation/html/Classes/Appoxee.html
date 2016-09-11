@@ -66,6 +66,8 @@
 		
 		<option value="//api/name/postponeNotificationRequest">postponeNotificationRequest</option>
 		
+		<option value="//api/name/showNotificationsOnForeground">showNotificationsOnForeground</option>
+		
 	</optgroup>
 	
 
@@ -147,6 +149,8 @@
 		<option value="//api/name/setNumberValue:forKey:withCompletionHandler:">- setNumberValue:forKey:withCompletionHandler:</option>
 		
 		<option value="//api/name/setStringValue:forKey:withCompletionHandler:">- setStringValue:forKey:withCompletionHandler:</option>
+		
+		<option value="//api/name/userNotificationCenter:didReceiveNotificationResponse:withAppoxeeCompletionHandler:">- userNotificationCenter:didReceiveNotificationResponse:withAppoxeeCompletionHandler:</option>
 		
 	</optgroup>
 	
@@ -249,6 +253,49 @@ Setting the property should be performed prior to engaging the SDK.</p>
 		    
 
 			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL postponeNotificationRequest</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Appoxee.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/showNotificationsOnForeground" title="showNotificationsOnForeground"></a>
+	<h3 class="method-title"><code><a href="#//api/name/showNotificationsOnForeground">&nbsp;&nbsp;showNotificationsOnForeground</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Indicates if Appoxee should show notifications when application is in foreground, on iOS10 and above.
+Set this property when ever needed, to change this behavior.
+Default value is NO.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL showNotificationsOnForeground</code></div>
 
 		    
 			
@@ -452,10 +499,8 @@ Setting the property should be performed prior to engaging the SDK.</p>
 
 <pre><code>
 Appoxee *appoxee = [Appoxee shared];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -505,10 +550,8 @@ Appoxee *appoxee = [Appoxee shared];
 
 <pre><code>
 NSString *sdkVersoin = [Appoxee sdkVersion];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -564,10 +607,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
     [[Appoxee shared] engageAndAutoIntegrateWithLaunchOptions:launchOptions andDelegate:nil];
     return YES;
 }
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -634,10 +675,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
     [[Appoxee shared] engageWithLaunchOptions:launchOptions andDelegate:self andSDKID:@"123"];
     return YES;
 }
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -708,10 +747,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 {
     [[Appoxee shared] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -772,10 +809,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 {
     [[Appoxee shared] didRegisterUserNotificationSettings:notificationSettings];
 }
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -836,10 +871,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 {
     [[Appoxee shared] receivedRemoteNotification:userInfo];
 }
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -900,10 +933,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 {
     [[Appoxee shared] handleActionWithIdentifier:identifier forRemoteNotification:userInfo completionHandler:completionHandler];
 }
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1017,10 +1048,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
          }
      }];
 }
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1111,10 +1140,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
     // Appoxee will call completionHandler(); with a UIBackgroundFetchResult when it will finish it’s work.
     [[Appoxee shared] performFetchWithCompletionHandler:completionHandler andNotifyCompletionWithBlock:nil];
 }
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1135,6 +1162,84 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
 					<tr>
 						<th scope="row" class="argument-name"><code>completionBlock</code></th>
 						<td><p>A completion block which will be called when Appoxee completes it&rsquo;s work, enabling the developer to be notified, in case fetchHandler is nil, and to call the fetchHandler.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Appoxee.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/userNotificationCenter:didReceiveNotificationResponse:withAppoxeeCompletionHandler:" title="userNotificationCenter:didReceiveNotificationResponse:withAppoxeeCompletionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/userNotificationCenter:didReceiveNotificationResponse:withAppoxeeCompletionHandler:">&ndash;&nbsp;userNotificationCenter:didReceiveNotificationResponse:withAppoxeeCompletionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Forward UNNotificationResponse to Appoxee.
+@attention Method is required only if you intend to act as the UNUserNotificationCenterDelegate.</p>
+
+<pre><code>
+#pragma mark - UNUserNotificationCenterDelegate
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler
+{
+    [[Appoxee shared] userNotificationCenter:center didReceiveNotificationResponse:response withAppoxeeCompletionHandler:^{
+
+        // Appoxee completed it's work. 
+        completionHandler();
+    }];
+}
+</code></pre>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)userNotificationCenter:(nonnull UNUserNotificationCenter *)<em>center</em> didReceiveNotificationResponse:(nonnull UNNotificationResponse *)<em>response</em> withAppoxeeCompletionHandler:(nullable void ( ^ ) ( ))<em>appoxeeCompletionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>center</code></th>
+						<td><p>The notification center that received the notification.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>response</code></th>
+						<td><p>The user’s response to the notification. This object contains the original notification and the identifier string for the selected action. If the action allowed the user to provide a textual response, this object is an instance of the UNTextInputNotificationResponse class.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>appoxeeCompletionHandler</code></th>
+						<td><p>The block to execute when Appoxee finished processing the notification. The block has no return value or parameters.</p></td>
 					</tr>
 				
 				</table>
@@ -1183,10 +1288,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
         // operation was successful.
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1255,10 +1358,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
         BOOL state = [(NSNumber *)data boolValue];
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1322,10 +1423,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
         // operation was successful.
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1394,10 +1493,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
         BOOL state = [(NSNumber *)data boolValue];
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1460,10 +1557,8 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
         // Alias was set.
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1531,11 +1626,10 @@ NSString *sdkVersoin = [Appoxee sdkVersion];
         // Alias was removed.
     }
 }];
-</pre>
+</code></pre>
 
 
-<p></code>
-An NSString object representing an alias.</p>
+<p>An NSString object representing an alias.</p>
 			</div>
 			
 		    
@@ -1598,10 +1692,8 @@ An NSString object representing an alias.</p>
         NSString *deviceAlias = (NSString *)data;
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1664,10 +1756,8 @@ An NSString object representing an alias.</p>
         // Alias cache was cleared.
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1731,10 +1821,8 @@ An NSString object representing an alias.</p>
         NSArray *deviceTags = (NSArray *)data;
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1798,10 +1886,8 @@ An NSString object representing an alias.</p>
         NSArray *applicationTags = (NSArray *)data;
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1865,10 +1951,8 @@ An NSString object representing an alias.</p>
         // check the error domain
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -1937,10 +2021,8 @@ An NSString object representing an alias.</p>
         // check the error domain
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2009,10 +2091,8 @@ An NSString object representing an alias.</p>
         // check the error domain
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2086,10 +2166,8 @@ An NSString object representing an alias.</p>
         // operation is successful
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2152,10 +2230,8 @@ An NSString object representing an alias.</p>
         // Operation was successful.
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2228,10 +2304,8 @@ An NSString object representing an alias.</p>
         // Operation was successful.
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2305,10 +2379,8 @@ An NSString object representing an alias.</p>
         // Operation was successful.
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2381,10 +2453,8 @@ An NSString object representing an alias.</p>
         // Operation was successful.
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2461,10 +2531,8 @@ An NSString object representing an alias.</p>
 
     // If there wan't an error, and data object is nil, then value doesn't exist on the device.
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2532,10 +2600,8 @@ An NSString object representing an alias.</p>
         // custom fields cache was cleared.
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2594,10 +2660,8 @@ An NSString object representing an alias.</p>
     // Note that calling this method prior to device registration will provide basic information regarding this device.
     // Developers should prefare using deviceInformationwithCompletionHandler:
     APXClientDevice *device = [[Appoxee shared] deviceInfo];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2660,10 +2724,8 @@ An NSString object representing an alias.</p>
         APXClientDevice *device = (APXClientDevice *)data;
     }
   }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2727,10 +2789,8 @@ An NSString object representing an alias.</p>
         NSArray *messages = (NSArray *)data; // all objects in array are of type APXRichMessage
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2859,10 +2919,8 @@ An NSString object representing an alias.</p>
         NSArray *messages = (NSArray *)data; // all objects in array are of type APXRichMessage
     }
 }];
-</pre>
+</code></pre>
 
-
-<p></code></p>
 			</div>
 			
 		    
@@ -2918,7 +2976,7 @@ An NSString object representing an alias.</p>
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2016 Teradata. All rights reserved. Updated: 2016-08-23</p>
+						<p class="copyright">Copyright &copy; 2016 Teradata. All rights reserved. Updated: 2016-09-11</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

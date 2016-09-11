@@ -10,8 +10,10 @@
 		<integer>0</integer>
 		<key>sdk_key</key>
 		<string></string>
-        <key>is_eu</key> <!-- Indicate if account is EU / US -->
-        <false/>
+		<key>is_eu</key>
+		<false/>
+		<key>open_landing_page_inside_app</key>
+		<false/>
 	</dict>
 </dict>
 </plist>
