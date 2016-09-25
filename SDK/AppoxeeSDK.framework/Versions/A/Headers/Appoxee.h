@@ -24,8 +24,8 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
 /**
  Delegate method for informing Push Notification handling by Appoxee SDK.
  @brief Method is called when a Push Notification is handled by Appoxee SDK.
- @param manager A singleton instance of Appoxee.
- @param pushNotificatoin An instance of APXPushNotification object which represents a Push Notification object.
+ @param appoxee A singleton instance of Appoxee.
+ @param pushNotification An instance of APXPushNotification object which represents a Push Notification object.
  @param actionIdentifier An optional identifier, if the Push Notification has an ‘action’ associated with it, else value is nil.
  */
 - (void)appoxee:(nonnull Appoxee *)appoxee handledRemoteNotification:(nonnull APXPushNotification *)pushNotification andIdentifer:(nonnull NSString *)actionIdentifier;
@@ -34,7 +34,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  Delegate method for informing Rich Content handling by Appoxee SDK and was delivered with a Push Notification.
  @brief Method iscalled when Rich Content is handled by Appoxee SDK and is delivered with a Push Notification. @attention The developer should decide how to display the Rich Message content.
  @attention The developer should decide how to display the Rich Message content.
- @param manager A singleton instance of Appoxee.
+ @param appoxee A singleton instance of Appoxee.
  @param richMessage An instance of APXRichMessage object which represents Rich Content object.
  @param didLaunch A Boolean value indicating if the Rich Content was recieved while app was launched, due to a Push Notification.
  */
@@ -164,7 +164,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
  @endcode
  @param notificationSettings UIUserNotificationSettings instance.
  */
-- (void)didRegisterUserNotificationSettings:(nullable UIUserNotificationSettings *)notificationSettings;
+- (void)didRegisterUserNotificationSettings:(nullable NSObject *)notificationSettings;
 
 #pragma mark - Push Handling iOS9
 
@@ -697,7 +697,7 @@ typedef void(^AppoxeeCompletionHandler)(NSError * _Nullable appoxeeError, id _Nu
     // Developers should prefare using deviceInformationwithCompletionHandler:
     APXClientDevice *device = [[Appoxee shared] deviceInfo];
  @endcode
- @param APXClientDevice an instance that describes this device.
+ @return APXClientDevice an instance that describes this device.
  */
 - (nonnull APXClientDevice *)deviceInfo;
 

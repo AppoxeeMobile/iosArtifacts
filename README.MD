@@ -18,15 +18,15 @@ end
 
 ```ruby
 target 'project_name' do
-    pod 'AppoxeeSDK', :git => 'https://github.com/AppoxeeMobile/iosArtifacts.git', :tag => '4.1.0'
+    pod 'AppoxeeSDK', :git => 'https://github.com/AppoxeeMobile/iosArtifacts.git', :tag => '4.1.1'
 end
 ```
 
 **Manual**
 
-    * Drag and drop the ```AppoxeeSDK.framework``` to your project.
-    * Drag and drop the ```AppoxeeSDKResources.bundle``` to your project.
-    * Link ```UserNotifications.framework``` to your project.
+* Drag and drop the ```AppoxeeSDK.framework``` to your project.
+* Drag and drop the ```AppoxeeSDKResources.bundle``` to your project.
+* Link ```UserNotifications.framework``` to your project.
 
 
 Configuration file
@@ -80,4 +80,3 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 License
 -------
 http://www.appoxee.com/terms/
-
