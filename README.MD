@@ -18,7 +18,7 @@ end
 
 ```ruby
 target 'project_name' do
-    pod 'AppoxeeSDK', :git => 'https://github.com/AppoxeeMobile/iosArtifacts.git', :tag => '4.1.1'
+    pod 'AppoxeeSDK', :git => 'https://github.com/AppoxeeMobile/iosArtifacts.git', :tag => '4.1.2'
 end
 ```
 
